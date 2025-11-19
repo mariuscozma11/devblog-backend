@@ -16,4 +16,6 @@ export const typeormConfig: DataSourceOptions = {
   //
   entities: [Post],
   logging: true,
+
+  migrationsRun: process.env.NODE_ENV === 'production',
 };
