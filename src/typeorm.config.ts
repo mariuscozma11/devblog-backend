@@ -1,7 +1,7 @@
 import { DataSourceOptions } from 'typeorm';
 import { Post } from './post/entities/post.entity';
-import * as dotenv from 'dotenv';
-dotenv.config();
+
+import { User } from './user/entities/user.entity';
 
 export const typeormConfig: DataSourceOptions = {
   type: 'postgres',
@@ -14,7 +14,7 @@ export const typeormConfig: DataSourceOptions = {
   synchronize: false,
   migrations: [__dirname + '/migrations/*.js'],
   //
-  entities: [Post],
+  entities: [Post, User],
   logging: true,
 
   migrationsRun: process.env.NODE_ENV === 'production',
