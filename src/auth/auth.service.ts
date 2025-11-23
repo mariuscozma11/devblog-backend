@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
 import { LoginDto } from './dto/auth.dto';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -24,10 +24,10 @@ export class AuthService {
     const isMatch = await bcrypt.compare(loginDto.password, user.password);
 
     if (!isMatch) {
-      throw new HttpException('Wrong credentials', HttpStatus.UNAUTHORIZED);
+      throw new UnauthorizedException;
     }
     if (isMatch) {
-      const payload = { sub: user.id, email: user.email};
+      const payload = { id: user.id, email: user.email};
       return {
         access_token: await this.jwtService.signAsync(payload),
       };
