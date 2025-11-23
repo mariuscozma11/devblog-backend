@@ -10,7 +10,7 @@ import * as bcrypt from 'bcrypt';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @Column({ type: 'varchar', nullable: false, length: 20, unique: true })
   username: string;
@@ -19,7 +19,7 @@ export class User {
   email: string;
 
   @Column({ nullable: false, type: 'varchar', length: 250 })
-  password?: string;
+  password: string;
 
   @BeforeInsert()
   @BeforeUpdate()
