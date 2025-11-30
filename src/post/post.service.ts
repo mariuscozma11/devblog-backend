@@ -16,7 +16,7 @@ export class PostService {
   // create(createPostDto: CreatePostDto) {
   //   return 'This action adds a new post';
   // }
-  async crePost(createPostDto: CreatePostDto): Promise<CreatePostDto> {
+  async createPost(createPostDto: CreatePostDto): Promise<CreatePostDto> {
     const newPost = new Post();
     Object.assign(newPost, createPostDto);
 

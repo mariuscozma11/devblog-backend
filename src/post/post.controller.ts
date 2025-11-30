@@ -1,6 +1,7 @@
 import {
   Controller,
   Get,
+  UseGuards,
   // Post,
   // Body,
   // Patch,
@@ -8,6 +9,10 @@ import {
   // Delete,
 } from '@nestjs/common';
 import { PostService } from './post.service';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { Role } from 'src/auth/enums/role.enum';
+import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 // import { CreatePostDto } from './dto/create-post.dto';
 // import { UpdatePostDto } from './dto/update-post.dto';
 
@@ -19,7 +24,8 @@ export class PostController {
   // create(@Body() createPostDto: CreatePostDto) {
   //   return this.postService.create(createPostDto);
   // }
-
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
   @Get()
   async findAll() {
     return await this.postService.findAll();

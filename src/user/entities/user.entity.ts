@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { Role } from '../../auth/enums/role.enum';
 
 @Entity()
 export class User {
@@ -20,6 +21,13 @@ export class User {
 
   @Column({ nullable: false, type: 'varchar', length: 250 })
   password: string;
+  
+  @Column({
+    type: 'enum',
+    enum: Role,
+    default: Role.User,
+  })
+  role: Role;
 
   @BeforeInsert()
   @BeforeUpdate()
